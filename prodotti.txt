@@ -1,5 +1,5 @@
 234 cravatte 12.8
-236 calzini cotone 3.5
+236 calzinicotone 3.5
 247 camicia 30.2
 250 pantaloni 76.8
 260 giacca 192.6
