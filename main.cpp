@@ -5,11 +5,13 @@
 #define N 100
 using namespace std;
 
+//definizione elemento della lista
 struct elem {
     char descr[21];
     double tot;
     elem *succ;
 };
+//creazione del termine lista
 typedef elem *lista;
 
 struct prodotto {
@@ -24,16 +26,19 @@ struct ordine {
     int quant;
 };
 
+//Legge il file prodotti.txt e lo memorizza in un vettore di tipo prodotto
 int leggi1(prodotto v[]) {
     fstream in;
     in.open("C:\\Users\\Thinkpad User\\CLionProjects\\ordini\\prodotti.txt", ios::in);
 
+    //se il file non è aperto
     if (!in.is_open()) {
         cout << "Errore apertura file prodotti." << endl;
         return 0;
     }
 
     int i = 0;
+    //finché il file ha input da prendere
     while (in.good()) {
         in >> v[i].codice_prod >> v[i].descrizione >> v[i].prezzo;
         i++;
@@ -44,6 +49,7 @@ int leggi1(prodotto v[]) {
 
 }
 
+//Legge il file ordini.txt e lo memorizza in un vettore di tipo ordine
 int leggi2(ordine v[]) {
     fstream in;
     in.open("C:\\Users\\Thinkpad User\\CLionProjects\\ordini\\ordini.txt", ios::in);
@@ -65,6 +71,7 @@ int leggi2(ordine v[]) {
 }
 
 
+//cerca il codice inserito e restituisce descrizione e prezzo del prodotto
 void recupera_prezzo_descr(int codice_prodotto, prodotto P[],
                            int n_prodotti, double &prezzo, char descrizione[]) {
     int i = 0;
@@ -78,9 +85,10 @@ void recupera_prezzo_descr(int codice_prodotto, prodotto P[],
     }
 }
 
+//inserisce elemento nella lista
 void inserimento(lista &p0, elem a) {
     lista p = 0, q, r;
-    for (q = p0; q != 0 && (strcmp(q->descr, a.descr)<0); q = q->succ)
+    for (q = p0; q != 0 && (strcmp(q->descr, a.descr) < 0); q = q->succ)
         p = q;
     r = new elem;
     strcpy(r->descr, a.descr);
@@ -91,13 +99,14 @@ void inserimento(lista &p0, elem a) {
     else p->succ = r;
 }
 
+//stampa lista
 void stampalista(lista p0) {
     lista p = p0;
     while (p != 0) {
-        cout << p->descr << ' '<< p->tot << endl;
+        cout << p->descr << ' ' << p->tot << endl;
         p = p->succ;
     }
-    cout<<'\n';
+    cout << '\n';
 }
 
 int main() {
@@ -106,7 +115,7 @@ int main() {
     ordine o[N];
     int p_quant, o_quant;
 
-
+    //legge i file, le funzioni restituiscono la dimensione
     p_quant = leggi1(p);
     o_quant = leggi2(o);
 
